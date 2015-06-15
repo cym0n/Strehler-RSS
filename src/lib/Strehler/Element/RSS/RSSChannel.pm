@@ -4,6 +4,8 @@ use strict;
 use Cwd 'abs_path';
 use Moo;
 use Dancer2 0.154000;
+use Strehler::Helpers;
+use File::Copy;
 
 extends 'Strehler::Element';
 with 'Strehler::Element::Role::Slugged';
@@ -73,12 +75,18 @@ sub custom_list_template
     return $views_path . "/admin/rss/rss_list_block.tt";
 }
 
-
-
-
 sub install
 {
-    #TODO: DB creation
-    #TODO: statics copy
+    my $self = shift;
+    my $dbh = shift;
+    $self->deploy_entity_on_db($dbh, ["Strehler::Schema::RSS::Result::Rsschannel", "Strehler::Schema::RSS::Result::RsschannelHeader"]);
+    my $package_root = __FILE__;
+    $package_root =~ s/RSSChannel\.pm$//;
+    my $statics = $package_root . "../../public";
+    my $configured_public_directory = Strehler::Helpers::public_directory();
+    copy($statics . "/strehler/js/rsschannel.js", $configured_public_directory . "/strehler/js") || print "Failing copying from $statics" . "/js/rsschannel.js to " . $configured_public_directory . "/strehler/js\nError: " . $! . "\n";
+    return "RSS Channel entity available!\n\nJavascript resources copied under public directory!\n\nDeploy of database tables completed\n\nCheck above for errors\n\nRun strehler schemadump to update your model\n\n";
 }
+
+
 
