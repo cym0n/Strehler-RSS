@@ -1,5 +1,7 @@
 package Strehler::RSS;
 
+# ABSTRACT: RSS management using Strehler
+
 use strict;
 use Dancer2 0.160000;
 use Strehler::Element::RSS::RSSChannel;
@@ -24,7 +26,7 @@ get '/:lang/:slug' => sub
     $query->{'language'} = $language;
     $query->{'published'} = 1;
     $query->{'ext'} = 1;
-    if($rss->get_attr("deep") == 1)
+    if($rss->get_attr("deep") && $rss->get_attr("deep") == 1)
     {
         $query->{'ancestor'} = $rss->get_attr("category", 1);
     }
