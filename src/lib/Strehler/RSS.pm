@@ -22,7 +22,7 @@ get '/:lang/:slug' => sub
     my $query;
     $query->{'order'} = 'desc';
     $query->{'order_by'} = $rss->get_attr("order_by");
-    $query->{'entries_per_page'} = 6;
+    $query->{'entries_per_page'} = config->{Strehler}->{RSS}->{entries} || 6;
     $query->{'language'} = $language;
     $query->{'published'} = 1;
     $query->{'ext'} = 1;
@@ -60,6 +60,15 @@ get '/:lang/:slug' => sub
 
     content_type('application/rss+xml');
     return $feed->as_xml;
+};
+
+get '/:slug' => sub
+{
+    forward "/" . dancer_app->prefix . "/" . config->{Strehler}->{default_language} . "/" . params->{slug};
+
+
+
+
 };
 
 1;

@@ -2,7 +2,7 @@ elements:
     - name: title
       label: Channel Title
       attributes:
-        class: span8
+        class: span7
       constraints:
         - type: Required
           message: "Title of channel required"
@@ -10,7 +10,7 @@ elements:
     - name: description
       label: Channel Description
       attributes:
-        class: span8
+        class: span7
       constraints:
         - type: Required
           message: "Channel description required"

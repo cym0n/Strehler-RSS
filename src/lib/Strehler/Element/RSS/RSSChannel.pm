@@ -31,7 +31,7 @@ sub form { return "$form_path/RSS/rsschannel.yml" }
 sub multilang_form { return "$form_path/RSS/rsschannel_multilang.yml" }
 sub categorized { return 1; }
 sub publishable  { return 1; }
-sub add_main_column_span { return 9; }
+sub add_main_column_span { return 8; }
 sub entity_js { return '/strehler/js/rsschannel.js'; }
 
 sub main_title
@@ -73,6 +73,53 @@ sub fields_list
 sub custom_list_template
 {
     return $views_path . "/admin/rss/rss_list_block.tt";
+}
+sub custom_snippet_add_position
+{
+    return "right";
+}
+sub custom_add_snippet
+{
+    my $self = shift;
+    if(ref($self))
+    {
+        my @languages;
+        if(config->{Strehler}->{languages})
+        {
+            @languages = @{config->{Strehler}->{languages}};
+        }
+        else
+        {
+            @languages = ('en');
+        }
+        my $explain = q{
+        <p>Link to RSS, you can copy them from here and use them on the frontend</p>
+        <p>If you want to click them, remember that they'll work only if the RSS Channel is published.</p>
+        };
+        my $explain_default = q{
+            <p>Default RSS is the RSS in the default language</p>
+        };
+        my $default_language =  config->{Strehler}->{default_language};
+        my $default_link = "/rss/" . $self->get_attr_multilang('slug',  $default_language) . ".xml";
+        my $out = "<h3>Links to RSS</h3>" . $explain .
+                  "<h5>Default</h5>" . $explain_default .
+                  "<ul><li><a href=\"$default_link\">$default_link</a></li></ul>" .
+                  "<h5>By language</h5><ul>";
+        foreach my $lang (@languages)
+        {
+            if($self->get_attr_multilang('slug',  $lang))
+            {
+                my $link = "/rss/$lang/" . $self->get_attr_multilang('slug',  $lang) . ".xml";
+                $out .= "<li>$lang: <a href=\"$link\">$link</a></li>"
+            }
+        }
+        $out .= "</ul>";
+        return $out; 
+    }
+    else
+    {
+        return undef;
+    }
 }
 
 sub install

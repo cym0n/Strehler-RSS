@@ -7,7 +7,7 @@ elements:
         - type: Required
           message: "Link required"
       attributes:
-        class: span8
+        class: span7
     - label: Entity
       name: entity_type
       type: "+Strehler::FormFu::Element::EntityTypeSelect"
@@ -60,7 +60,7 @@ elements:
     - name: link_template
       label: "Link template (use %% to indicate where link field will go)"
       attributes:
-        class: span8
+        class: span7
       constraints:
         - type: Required
           message: "Link template required"
