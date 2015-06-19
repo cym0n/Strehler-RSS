@@ -135,5 +135,84 @@ sub install
     return "RSS Channel entity available!\n\nJavascript resources copied under public directory!\n\nDeploy of database tables completed\n\nCheck above for errors\n\nRun strehler schemadump to update your model\n\n";
 }
 
+=encoding utf8
+
+=head1 NAME
+
+Strehler::Element::RSS::RSSChannel - RSS Channel
+
+=head1 DESCRIPTION
+
+RSS Channel, configuration of a RSS Channel to erogate a feed based on Strehler entity.
+
+=head1 INSTALLATION
+
+    strehler initentity Strehler::Element::RSS::RSSChannel
+
+Entity installation will create two new database tables to store channels. You'll need a schemadump.
+
+A new javascript will be added to your public directory.
+
+=head1 ATTRIBUTES
+
+Many attributes are related to RSS 2.0 attributes, as defined by RSS 2.0 Specification: L<http://www.rssboard.org/rss-specification>
+
+=over 4
+
+=item B<link>
+
+Link for the Channel
+
+=item B<entity_type>
+
+The entity that will be used to generate the RSS
+
+=item B<category>
+
+The category of the contents of the RSS
+
+=item B<deep>
+
+If true will be retrieved contens from the category and from its subcategories.
+
+=item B<title_field>
+
+The field (from selected entity) that will be used as title of the feed.
+
+=item B<description_field>
+
+The field (from selected entity) that will be used as description of the feed. This content will be encoded and used for the field <content:encoded>
+
+=item B<link_field>
+
+The field (from selected entity) that will be used in the link_template (see below) to build the content link
+
+=item B<link_template>
+
+The way the content is reached in the site is indepentent from Strehler, based on how the frontend has been designed. You can write here the template to build a link to the content. Where the link_field will be used write just '%%'.
+
+=item B<order_by>
+
+The way contents will be ordered (to decide most recent).
+
+=item B<title>
+
+Multilanguage field.
+
+The title of the channel
+
+=item B<description>
+
+Multilanguage field.
+
+The description of the channel.
+
+=back
+
+RSS Channel is a Slugged entity. (see L<Strehler::Element::Role::Slugged>).
+
+=cut
+
+
 
 
