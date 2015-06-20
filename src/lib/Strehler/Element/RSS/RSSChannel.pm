@@ -131,7 +131,15 @@ sub install
     $package_root =~ s/RSSChannel\.pm$//;
     my $statics = $package_root . "../../public";
     my $configured_public_directory = Strehler::Helpers::public_directory();
-    copy($statics . "/strehler/js/rsschannel.js", $configured_public_directory . "/strehler/js") || print "Failing copying from $statics" . "/js/rsschannel.js to " . $configured_public_directory . "/strehler/js\nError: " . $! . "\n";
+    my $resource_file = 'rsschannel.js';
+    my $copy_from = $statics . "/strehler/js/" . $resource_file;
+    my $copy_to = $configured_public_directory . "/strehler/js/" . $resource_file;
+    if(-f $copy_to)
+    {
+        chmod 777, $copy_to;
+        unlink $copy_to;
+    }
+    copy($copy_from, $copy_to) || print "Failing copying from $copy_from to $copy_to\nError: " . $! . "\n";
     return "RSS Channel entity available!\n\nJavascript resources copied under public directory!\n\nDeploy of database tables completed\n\nCheck above for errors\n\nRun strehler schemadump to update your model\n\n";
 }
 
