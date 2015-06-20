@@ -65,10 +65,44 @@ get '/:lang/:slug' => sub
 get '/:slug' => sub
 {
     forward "/" . dancer_app->prefix . "/" . config->{Strehler}->{default_language} . "/" . params->{slug};
-
-
-
-
 };
+
+=encoding utf8
+
+=head1 NAME
+
+Strehler::RSS - RSS Feed created using Strehler contents
+
+=head1 DESCRIPTION
+
+Strehler::RSS gives a Strehler site possibility to have automatic RSS feed, based on contents published using Strehler.
+
+=head1 INSTALLATION
+
+In your Strehler-based site directory, do
+
+    strehler initentity Strehler::Element::RSS::RSSChannel
+
+As said by installation procedure, then do
+
+    strehler schemadump
+
+Add Strehler::RSS module to your app.psgi.
+
+=head1 CONFIGURATION
+
+There's only a configuration key available that you can manage from your config.yml.
+
+    Strehler:
+        RSS:
+            entries: 10
+
+Default value is 6, it means that, when the RSS feed is generated, latest six contents are retrieved and used as items. You can change it as you like. Using -1 will make Strehler::RSS to use all the configured contents in the feed.
+
+=head1 USE
+
+Look at the documentation of L<Strehler::Element::RSS::RSSChannel> to see how to configure an RSS Channel and how to retrieve link to it. Pur the link on your site to make RSS available to your users.
+
+=cut
 
 1;
