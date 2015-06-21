@@ -89,6 +89,8 @@ As said by installation procedure, then do
 
 Add Strehler::RSS module to your app.psgi.
 
+Remember to verify also that the module L<Strehler::API> (from Strehler main package) is in your app.psgi because it's used by backend form.
+
 =head1 CONFIGURATION
 
 There's only a configuration key available that you can manage from your config.yml.
@@ -101,7 +103,7 @@ Default value is 6, it means that, when the RSS feed is generated, latest six co
 
 =head1 USE
 
-Look at the documentation of L<Strehler::Element::RSS::RSSChannel> to see how to configure an RSS Channel and how to retrieve link to it. Pur the link on your site to make RSS available to your users.
+Look at the documentation of L<Strehler::Element::RSS::RSSChannel> to see how to configure an RSS Channel and how to retrieve link to it. Put the link on your site to make RSS available to your users.
 
 =cut
 

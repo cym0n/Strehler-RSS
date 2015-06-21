@@ -69,8 +69,8 @@ elements:
       label: "Order by"
       options: 
         - ['id', 'id']
-        - ['order', 'display_order']
-        - ['date', 'publish_date']
+        - ['display_order', 'order']
+        - ['publish_date', 'date']
     - type: "+Strehler::FormFu::Element::SubmitBlockMulti"
       actions:
         - submit-go
