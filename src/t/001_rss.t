@@ -167,6 +167,8 @@ test_psgi $rss_app, sub {
     my $cb = shift;
     my $link_to_rss = '/rss/it/' . $channel->{'slug'} . ".xml";
     my $r = $cb->(GET $link_to_rss);
+    my $retrieved_link = Strehler::Element::RSS::RSSChannel->get_link('article', 'dummy', 'it');
+    is($retrieved_link, $link_to_rss, "Link retrieving method works");
     like($r->content, qr/$rss2/, "RSS changed, deep flagged OK");
 };
 

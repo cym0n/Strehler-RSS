@@ -142,6 +142,32 @@ sub install
     copy($copy_from, $copy_to) || print "Failing copying from $copy_from to $copy_to\nError: " . $! . "\n";
     return "RSS Channel entity available!\n\nJavascript resources copied under public directory!\n\nDeploy of database tables completed\n\nCheck above for errors\n\nRun strehler schemadump to update your model\n\n";
 }
+sub get_link
+{
+    my $self = shift;
+    my $entity = shift;
+    my $category = shift;
+    my $lang = shift;
+    my $result = $self->get_list({ search => { entity_type => $entity }, 
+                      category => $category,
+                      language => $lang,
+                     ext => 1 });
+    if(exists $result->{'to_view'}->[0])
+    {
+        my $rss = $result->{'to_view'}->[0];
+        my $out = "/rss";
+        if($lang)
+        {
+            $out .= "/" . $lang;
+        }
+        $out .= "/" . $rss->{'slug'} . ".xml";
+        return $out;
+    }
+    else
+    {
+        return undef;
+    }
+}
 
 =encoding utf8
 
