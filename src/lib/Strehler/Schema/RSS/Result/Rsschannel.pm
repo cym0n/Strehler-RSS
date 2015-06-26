@@ -121,7 +121,7 @@ __PACKAGE__->add_columns(
   "link_template",
   { data_type => "varchar", is_nullable => 1, size => 100 },
   "order_by",
-  { data_type => "varchar", is_nullable => 1, size => 10 },
+  { data_type => "varchar", is_nullable => 1, size => 64 },
   "published",
   { data_type => "tinyint", is_nullable => 1 },
 );

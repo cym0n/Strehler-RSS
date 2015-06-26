@@ -245,6 +245,24 @@ The description of the channel.
 
 RSS Channel is a Slugged entity. (see L<Strehler::Element::Role::Slugged>).
 
+=head1 METHODS
+
+=over 4
+
+=item get_link
+
+Arguments: $entity, $category, $language
+
+Return Values: $link
+
+Class method that can be used to retrieve a link to a RSS, considering an entity and a category. If no language is provided the default link is returned.
+
+Warning: using $entity and $category a unique result is not guarantee. The method will however return the first value found in the database.
+
+Link structure is the one from L<Strehler::RSS>.
+
+=back
+
 =cut
 
 
