@@ -1,3 +1,11 @@
+1.1.1
+===
+
+__Fri Jun 26 2015__
+
+* get_link method documentation
+* fix for a bug about database generation
+
 1.1.0
 ===
 
