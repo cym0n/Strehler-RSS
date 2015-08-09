@@ -13,9 +13,12 @@ engines:
         template_toolkit:
             ENCODING: utf8
             DEFAULT: 'no.tt'
-template: "template_toolkit"
+    session:
+        YAML:
+            session_dir: "t/testapp/sessions"
 
 session: YAML
+template: "template_toolkit"
 
 plugins:
   DBIC:
